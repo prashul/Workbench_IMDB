@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" tns:targetNamespace="http://www.example.org/building" xmlns:tns="http://www.example.org/building" elementFormDefault="qualified">
+
+	<xs:element name="Building">
+		<xs:complexType mixed="true">
+			<xs:sequence>
+				<!-- Building Code -->
+				<xs:element name="BuildingCode">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:pattern value="[A-Z][A-Z][A-Z]"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<!-- Building Name -->
+				<xs:element name="BuildingName" type="xs:string">
+				</xs:element>
+				<!-- Position -->
+				<xs:element name="Position">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Latitude">
+								<xs:simpleType>
+									<xs:restriction base="xs:decimal">
+										<xs:fractionDigits value="6"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="Longitude">
+								<xs:simpleType>
+									<xs:restriction base="xs:decimal">
+										<xs:fractionDigits value="6"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<!-- Address -->
+				<xs:element name="Address" maxOccurs="1" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="StreetNo" type="xs:integer"/>
+							<xs:element name="StrName" type="xs:string"/>
+							<xs:element name="City" type="xs:string"/>
+							<xs:element name="State">
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:pattern value="[A-Z][A-Z]" />
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="Zip">
+								<xs:simpleType>
+									<xs:restriction base="xs:integer">
+										<xs:pattern value="[0-9][0-9][0-9][0-9][0-9]" />
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="BuildingData" type="BuildingDataType"></xs:element>
+	<xs:complexType name="BuildingDataType">
+		<xs:sequence>
+			<xs:element ref="Building" maxOccurs="unbounded"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+</xs:schema>

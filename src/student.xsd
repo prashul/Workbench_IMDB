@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" tns:targetNamespace="http://www.example.org/student" xmlns:tns="http://www.example.org/student" elementFormDefault="qualified">
+
+	<xs:element name="Student">
+		<xs:complexType>
+			<xs:sequence>
+				<!-- SSN -->
+				<xs:element name="SSN">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:pattern value="\d\d\d-\d\d-\d\d\d\d" />
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<!-- Name -->
+				<xs:element name="Name" type="xs:string" />
+				<!-- DOB -->				
+				<xs:element name="DOB" type="xs:date" />
+				<!-- Gender -->
+				<xs:element name="Gender">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:enumeration value="M" />
+							<xs:enumeration value="F" />
+							<xs:enumeration value="O" />
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<!-- Type -->
+				<xs:element name="Type">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:enumeration value="Master" />
+							<xs:enumeration value="Phd" />
+							<xs:enumeration value="Both" />
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<!-- Building Code -->
+				<xs:element name="BuildingCode" maxOccurs="unbounded" minOccurs="0">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:pattern value="[A-Z][A-Z][A-Z]" />
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<!-- Phone -->
+				<xs:element name="Phone" maxOccurs="unbounded" minOccurs="1">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:minLength value='10' />
+							<xs:maxLength value='14' />
+							<xs:pattern value="[0-9]{3}-[0-9]{3}-[0-9]{4}" />
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="StudentData" type="StudentDataType"></xs:element>
+	<xs:complexType name="StudentDataType">
+		<xs:sequence>
+			<xs:element ref="Student" maxOccurs="unbounded"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+</xs:schema>
